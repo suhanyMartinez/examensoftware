@@ -116,11 +116,27 @@ export async function PUT(
       },
     });
 
-    // If accepted, update project status to CLOSED
+    // If accepted, update project status to CLOSED and create contract
     if (status === "ACCEPTED") {
       await prisma.project.update({
         where: { id: proposal.projectId },
         data: { status: "CLOSED" },
+      });
+
+      // Create contract
+      await prisma.contract.create({
+        data: {
+          title: updatedProposal.title,
+          description: updatedProposal.description,
+          amount: updatedProposal.bidAmount,
+          status: "ACTIVE",
+          startDate: new Date(),
+          endDate: null,
+          proposalId: id,
+          clientId: proposal.clientId,
+          freelancerId: proposal.freelancerId,
+          projectId: proposal.projectId,
+        },
       });
     }
 

@@ -83,6 +83,9 @@ export function ProfileContent() {
                       <Link href="/proposals" className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-lg transition transform hover:scale-105 shadow-md">
                         📥 Propuestas
                       </Link>
+                      <Link href="/contracts" className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg transition transform hover:scale-105 shadow-md">
+                        📄 Contratos
+                      </Link>
                     </>
                   ) : (
                     <>
@@ -91,6 +94,9 @@ export function ProfileContent() {
                       </Link>
                       <Link href="/proposals" className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-lg transition transform hover:scale-105 shadow-md">
                         📤 Mis Propuestas
+                      </Link>
+                      <Link href="/contracts" className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg transition transform hover:scale-105 shadow-md">
+                        📄 Contratos
                       </Link>
                     </>
                   )}

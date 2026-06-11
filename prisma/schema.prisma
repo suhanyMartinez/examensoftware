@@ -39,6 +39,14 @@ enum ProposalStatus {
   REJECTED
 }
 
+enum ContractStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  SUSPENDED
+}
+
+
 model User {
   id        String     @id @default(cuid())
   email     String     @unique
@@ -57,6 +65,14 @@ model User {
   projects      Project[]
   proposals     Proposal[]  @relation("freelancer")
   receivedProposals Proposal[] @relation("client")
+
+  // Contratos
+  clientContracts     Contract[] @relation("clientContracts")
+  freelancerContracts Contract[] @relation("freelancerContracts")
+
+  // Mensajes
+  sentMessages      Message[] @relation("sender")
+  receivedMessages  Message[] @relation("receiver")
 
   // NextAuth
   accounts  Account[]
@@ -116,6 +132,9 @@ model Project {
   // Relación con propuestas
   proposals   Proposal[]
 
+  // Relación con contratos
+  contracts   Contract[]
+
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 }
@@ -139,9 +158,63 @@ model Proposal {
   clientId      String
   client        User            @relation("client", fields: [clientId], references: [id], onDelete: Cascade)
 
+  // Relación con contrato
+  contract      Contract?
+
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
   @@unique([freelancerId, projectId])
 }
 
+model Contract {
+  id              String          @id @default(cuid())
+  title           String
+  description     String
+  amount          Float
+  status          ContractStatus  @default(ACTIVE)
+  startDate       DateTime
+  endDate         DateTime?
+
+  // Relación con propuesta
+  proposalId      String          @unique
+  proposal        Proposal        @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+
+  // Relación con cliente
+  clientId        String
+  client          User            @relation("clientContracts", fields: [clientId], references: [id], onDelete: Cascade)
+
+  // Relación con freelancer
+  freelancerId    String
+  freelancer      User            @relation("freelancerContracts", fields: [freelancerId], references: [id], onDelete: Cascade)
+
+  // Relación con proyecto
+  projectId       String
+  project         Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  // Mensajes relacionados
+  messages        Message[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model Message {
+  id          String    @id @default(cuid())
+  content     String
+
+  // Relación con contrato
+  contractId  String
+  contract    Contract  @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  // Relación con remitente
+  senderId    String
+  sender      User      @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  // Relación con receptor
+  receiverId  String
+  receiver    User      @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  isRead      Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+}
