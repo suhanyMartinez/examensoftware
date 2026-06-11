@@ -27,7 +27,8 @@ export function LoginForm() {
       if (result?.error) {
         setError("Email o contraseña inválidos");
       } else if (result?.ok) {
-        router.push("/profile");
+        // Redirect to home after successful login
+        window.location.href = "/";
       }
     } catch (err) {
       setError("Error al iniciar sesión");

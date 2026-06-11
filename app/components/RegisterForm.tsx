@@ -54,7 +54,8 @@ export function RegisterForm() {
       });
 
       if (result?.ok) {
-        router.push("/profile");
+        // Redirect to home after successful login
+        window.location.href = "/";
       } else {
         setError("Registro exitoso. Por favor inicia sesión.");
         router.push("/login");
