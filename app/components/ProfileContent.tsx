@@ -74,6 +74,18 @@ export function ProfileContent() {
                   {session.user.name || "Usuario"}
                 </h1>
                 <p className="text-lg text-gray-600 mb-6">{session.user.email}</p>
+
+                {/* Rating Badge */}
+                <div className="mb-6 flex items-center gap-3">
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span key={star} className="text-xl text-yellow-400">
+                        ⭐
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-600">5.0 • Sin calificaciones aún</p>
+                </div>
                 <div className="flex flex-wrap gap-3">
                   {session.user.role === "CLIENT" ? (
                     <>
@@ -106,6 +118,12 @@ export function ProfileContent() {
                   >
                     ✏️ Editar Perfil
                   </button>
+                  <Link
+                    href={`/profiles/${session.user.id}`}
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition transform hover:scale-105 shadow-md text-center"
+                  >
+                    👁️ Ver Perfil Público
+                  </Link>
                   <button
                     onClick={handleSignOut}
                     className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg transition transform hover:scale-105 shadow-md"

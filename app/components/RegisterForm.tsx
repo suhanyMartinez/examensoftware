@@ -101,7 +101,7 @@ export function RegisterForm() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-700 text-gray-900"
                   placeholder="Juan Pérez"
                 />
               </div>
@@ -116,7 +116,7 @@ export function RegisterForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-700 text-gray-900"
                   placeholder="tu@ejemplo.com"
                 />
               </div>
@@ -129,10 +129,10 @@ export function RegisterForm() {
                   id="role"
                   value={role}
                   onChange={(e) => setRole(e.target.value as UserRole)}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-900 bg-white font-medium"
                 >
-                  <option value="CLIENT">👤 Cliente - Busco freelancers</option>
-                  <option value="FREELANCER">🚀 Freelancer - Ofrezco servicios</option>
+                  <option value="CLIENT" className="text-gray-900">👤 Cliente - Busco freelancers</option>
+                  <option value="FREELANCER" className="text-gray-900">🚀 Freelancer - Ofrezco servicios</option>
                 </select>
               </div>
 
@@ -146,7 +146,7 @@ export function RegisterForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-700 text-gray-900"
                   placeholder="••••••••"
                 />
               </div>
@@ -161,7 +161,7 @@ export function RegisterForm() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-700 text-gray-900"
                   placeholder="••••••••"
                 />
               </div>

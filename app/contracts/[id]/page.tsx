@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { ContractChat } from "@/app/components/ContractChat";
+import { ReviewForm } from "@/app/components/ReviewForm";
 
 interface Contract {
   id: string;
@@ -41,6 +42,7 @@ export default function ContractDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [updatingStatus, setUpdatingStatus] = useState(false);
+  const [hasReview, setHasReview] = useState(false);
 
   const id = params.id as string;
 
@@ -54,6 +56,11 @@ export default function ContractDetailPage() {
 
         const data = await res.json();
         setContract(data);
+
+        // Check if review exists
+        if (data.reviews) {
+          setHasReview(true);
+        }
       } catch (err) {
         setError("Error al cargar el contrato");
         console.error(err);
@@ -238,6 +245,29 @@ export default function ContractDetailPage() {
                 otherUserEmail={otherUser.email}
               />
             </div>
+
+            {/* Review Section */}
+            {contract.status === "COMPLETED" && !hasReview && (
+              <div className="bg-white rounded-2xl shadow-xl p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  ⭐ Calificar Trabajo
+                </h2>
+                <ReviewForm
+                  contractId={contract.id}
+                  revieweeId={otherUser.id}
+                  revieweeName={otherUser.name || otherUser.email}
+                  onSuccess={() => setHasReview(true)}
+                />
+              </div>
+            )}
+
+            {hasReview && contract.status === "COMPLETED" && (
+              <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
+                <p className="text-lg font-semibold text-green-800">
+                  ✅ Ya has calificado este trabajo
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Sidebar - Parties */}

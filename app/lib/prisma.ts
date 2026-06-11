@@ -1,31 +1,30 @@
 import "./env";
 
-let prismaClientInstance: any = null;
+import { PrismaClient } from "../generated/prisma";
+import { PrismaPg } from "@prisma/adapter-pg";
+import pg from "pg";
 
-const prismaProxy = new Proxy(
-  {},
-  {
-    get: (target: any, prop: string) => {
-      if (prismaClientInstance) {
-        return (prismaClientInstance as any)[prop];
-      }
+const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
-      // Lazy initialization
-      if (typeof window === "undefined") {
-        try {
-          const { PrismaClient } = require("../generated/prisma");
-          prismaClientInstance = new PrismaClient();
-          return (prismaClientInstance as any)[prop];
-        } catch (e) {
-          console.warn("Prisma not initialized:", e);
-          return undefined;
-        }
-      }
+let prismaInstance: PrismaClient;
 
-      return undefined;
-    },
+if (process.env.NODE_ENV === "production") {
+  prismaInstance = new PrismaClient({
+    adapter: new PrismaPg({
+      connectionString: process.env.DATABASE_URL,
+    }),
+  });
+} else {
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = new PrismaClient({
+      adapter: new PrismaPg({
+        connectionString: process.env.DATABASE_URL,
+      }),
+      log: ["query", "error", "warn"],
+    });
   }
-) as any;
+  prismaInstance = globalForPrisma.prisma;
+}
 
-export default prismaProxy;
-export const prisma = prismaProxy;
+export const prisma = prismaInstance;
+export default prisma;

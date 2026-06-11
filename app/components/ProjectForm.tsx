@@ -107,7 +107,7 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition placeholder-gray-700 text-gray-900"
           placeholder="Ej: Diseño de logo profesional"
         />
       </div>
@@ -122,7 +122,7 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
           onChange={(e) => setDescription(e.target.value)}
           required
           rows={5}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition placeholder-gray-700 text-gray-900"
           placeholder="Describe tu proyecto en detalle..."
         />
       </div>
@@ -136,7 +136,7 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value as ProjectCategory)}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition placeholder-gray-700 text-gray-900"
           >
             {categoryOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>
@@ -158,7 +158,7 @@ export function ProjectForm({ initialData, isEditing }: ProjectFormProps) {
             required
             step="0.01"
             min="0"
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition placeholder-gray-700 text-gray-900"
             placeholder="5000"
           />
         </div>

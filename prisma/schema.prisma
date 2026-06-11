@@ -61,6 +61,10 @@ model User {
   bio       String?
   location  String?
 
+  // Reputación
+  rating    Float     @default(5.0)
+  reviewCount Int     @default(0)
+
   // Relaciones
   projects      Project[]
   proposals     Proposal[]  @relation("freelancer")
@@ -73,6 +77,10 @@ model User {
   // Mensajes
   sentMessages      Message[] @relation("sender")
   receivedMessages  Message[] @relation("receiver")
+
+  // Reviews/Calificaciones
+  givenReviews      Review[] @relation("reviewer")
+  receivedReviews   Review[] @relation("reviewee")
 
   // NextAuth
   accounts  Account[]
@@ -195,6 +203,9 @@ model Contract {
   // Mensajes relacionados
   messages        Message[]
 
+  // Reviews relacionados
+  reviews         Review?
+
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 }
@@ -217,4 +228,26 @@ model Message {
 
   isRead      Boolean   @default(false)
   createdAt   DateTime  @default(now())
+}
+
+model Review {
+  id          String    @id @default(cuid())
+  rating      Int       // 1-5 stars
+  comment     String?
+
+  // Relación con contrato
+  contractId  String    @unique
+  contract    Contract  @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  // Quien califica
+  reviewerId  String
+  reviewer    User      @relation("reviewer", fields: [reviewerId], references: [id], onDelete: Cascade)
+
+  // Quien es calificado
+  revieweeId  String
+  reviewee    User      @relation("reviewee", fields: [revieweeId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime  @default(now())
+
+  @@unique([contractId, reviewerId])
 }

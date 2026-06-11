@@ -84,7 +84,7 @@ export function ProposalForm({ projectId, projectTitle }: ProposalFormProps) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition placeholder-gray-700 text-gray-900"
           placeholder="Ej: Desarrollo web moderno con React"
         />
       </div>
@@ -99,7 +99,7 @@ export function ProposalForm({ projectId, projectTitle }: ProposalFormProps) {
           onChange={(e) => setDescription(e.target.value)}
           required
           rows={5}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition placeholder-gray-700 text-gray-900"
           placeholder="Explica por qué eres la mejor opción para este proyecto..."
         />
       </div>
@@ -116,7 +116,7 @@ export function ProposalForm({ projectId, projectTitle }: ProposalFormProps) {
           required
           step="0.01"
           min="0"
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition placeholder-gray-700 text-gray-900"
           placeholder="1000"
         />
       </div>
