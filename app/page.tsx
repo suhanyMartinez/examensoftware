@@ -9,8 +9,8 @@ export default async function Home() {
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur border-b border-slate-700">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex justify-between items-center">
-          <div className="flex items-center space-x-4">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">W</span>
             </div>
@@ -19,7 +19,7 @@ export default async function Home() {
             </span>
           </div>
 
-          <div className="flex items-center space-y-0 space-x-8">
+          <div className="flex items-center space-x-6">
             {session ? (
               <>
                 <span className="text-slate-300 text-sm">
@@ -53,8 +53,8 @@ export default async function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
             <h1 className="text-5xl md:text-7xl font-bold text-slate-50 mb-6 leading-tight">
               La plataforma de
@@ -106,12 +106,12 @@ export default async function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-28 bg-slate-800/50 border-t border-slate-700">
+      <section className="py-20 bg-slate-800/50 border-t border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center text-slate-50 mb-20">
+          <h2 className="text-4xl font-bold text-center text-slate-50 mb-16">
             Por qué elegir Workana
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 title: "Interfaz Intuitiva",
@@ -128,15 +128,15 @@ export default async function Home() {
             ].map((feature, idx) => (
               <div
                 key={idx}
-                className="bg-slate-700/50 border border-slate-600 rounded-xl p-10 hover:border-slate-500 transition"
+                className="bg-slate-700/50 border border-slate-600 rounded-xl p-8 hover:border-slate-500 transition"
               >
-                <div className="w-12 h-12 bg-blue-600/20 rounded-lg mb-6 flex items-center justify-center">
+                <div className="w-12 h-12 bg-blue-600/20 rounded-lg mb-4 flex items-center justify-center">
                   <div className="w-6 h-6 bg-blue-400 rounded"></div>
                 </div>
-                <h3 className="text-xl font-bold text-slate-100 mb-4">
+                <h3 className="text-xl font-bold text-slate-100 mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-slate-400 leading-relaxed">{feature.description}</p>
+                <p className="text-slate-400">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -144,19 +144,19 @@ export default async function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-28">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-            <div className="text-center py-6">
-              <div className="text-5xl font-bold text-blue-400 mb-4">10K+</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="text-center">
+              <div className="text-5xl font-bold text-blue-400 mb-2">10K+</div>
               <p className="text-slate-400 text-lg">Usuarios activos</p>
             </div>
-            <div className="text-center py-6">
-              <div className="text-5xl font-bold text-blue-400 mb-4">50K+</div>
+            <div className="text-center">
+              <div className="text-5xl font-bold text-blue-400 mb-2">50K+</div>
               <p className="text-slate-400 text-lg">Proyectos completados</p>
             </div>
-            <div className="text-center py-6">
-              <div className="text-5xl font-bold text-blue-400 mb-4">4.9/5</div>
+            <div className="text-center">
+              <div className="text-5xl font-bold text-blue-400 mb-2">4.9/5</div>
               <p className="text-slate-400 text-lg">Calificación promedio</p>
             </div>
           </div>
@@ -164,12 +164,12 @@ export default async function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-28 border-t border-slate-700">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-slate-50 mb-8">
+      <section className="py-20 border-t border-slate-700">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold text-slate-50 mb-6">
             ¿Listo para comenzar?
           </h2>
-          <p className="text-xl text-slate-400 mb-12 leading-relaxed">
+          <p className="text-xl text-slate-400 mb-8">
             Únete a miles de profesionales que ya están colaborando en proyectos exitosos.
           </p>
           {!session && (
@@ -184,38 +184,38 @@ export default async function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-700 py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <footer className="bg-slate-900 border-t border-slate-700 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h4 className="text-slate-100 font-semibold mb-6">Workana</h4>
-              <p className="text-slate-400 text-sm leading-relaxed">Plataforma de freelance moderna para conectar talento con oportunidades.</p>
+              <h4 className="text-slate-100 font-semibold mb-4">Workana</h4>
+              <p className="text-slate-400 text-sm">Plataforma de freelance moderna para conectar talento con oportunidades.</p>
             </div>
             <div>
-              <h4 className="text-slate-100 font-semibold mb-6">Recursos</h4>
-              <ul className="text-slate-400 text-sm space-y-3">
+              <h4 className="text-slate-100 font-semibold mb-4">Recursos</h4>
+              <ul className="text-slate-400 text-sm space-y-2">
                 <li><Link href="#" className="hover:text-blue-400 transition">Documentación</Link></li>
                 <li><Link href="#" className="hover:text-blue-400 transition">Blog</Link></li>
                 <li><Link href="#" className="hover:text-blue-400 transition">Soporte</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-slate-100 font-semibold mb-6">Compañía</h4>
-              <ul className="text-slate-400 text-sm space-y-3">
+              <h4 className="text-slate-100 font-semibold mb-4">Compañía</h4>
+              <ul className="text-slate-400 text-sm space-y-2">
                 <li><Link href="#" className="hover:text-blue-400 transition">Acerca de</Link></li>
                 <li><Link href="#" className="hover:text-blue-400 transition">Términos</Link></li>
                 <li><Link href="#" className="hover:text-blue-400 transition">Privacidad</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-slate-100 font-semibold mb-6">Legal</h4>
-              <ul className="text-slate-400 text-sm space-y-3">
+              <h4 className="text-slate-100 font-semibold mb-4">Legal</h4>
+              <ul className="text-slate-400 text-sm space-y-2">
                 <li><Link href="#" className="hover:text-blue-400 transition">Términos de servicio</Link></li>
                 <li><Link href="#" className="hover:text-blue-400 transition">Política de privacidad</Link></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-slate-700 pt-12 text-center text-slate-400 text-sm">
+          <div className="border-t border-slate-700 pt-8 text-center text-slate-400 text-sm">
             <p>&copy; 2026 Workana. Todos los derechos reservados.</p>
           </div>
         </div>
