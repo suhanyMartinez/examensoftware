@@ -2,81 +2,28 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 
-export default async function Home() {
-  const session = await getServerSession(authOptions);
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">W</span>
-            </div>
-            <span className="text-2xl font-bold text-slate-900">
-              Workana
-            </span>
-          </div>
-
-          <div className="flex items-center space-y-0 space-x-8">
-            {session ? (
-              <>
-                <span className="text-slate-600 text-sm">
-                  Bienvenido, {session.user?.name}
-                </span>
-                <Link
-                  href="/profile"
-                  className="px-4 py-2 rounded-lg text-slate-600 hover:text-blue-600 transition font-medium"
-                >
-                  Ir a Perfil
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="text-slate-600 hover:text-blue-600 font-medium transition"
-                >
-                  Iniciar Sesión
-                </Link>
-                <Link
-                  href="/register"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition"
-                >
-                  Registrarse
-                </Link>
-              </>
-            )}
-          </div>
-        </nav>
-      </header>
-
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-              🚀 La plataforma de
-              <span className="block text-blue-600">
-                freelance moderna
-              </span>
+            <h1 className="text-5xl font-bold text-slate-900 mb-6">
+              La plataforma de freelance moderna
             </h1>
-            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-              Conecta con profesionales de todo el mundo. Publica proyectos, encuentra talento, y colabora de manera segura.
+            <p className="text-base text-slate-600 mb-8">
+              Conecta con profesionales. Publica proyectos. Colabora de manera segura.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               {!session ? (
                 <>
                   <Link
                     href="/register"
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition text-center"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-semibold transition text-center text-sm"
                   >
                     Comenzar
                   </Link>
                   <Link
                     href="/login"
-                    className="border border-slate-300 text-slate-600 hover:border-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg font-semibold transition text-center"
+                    className="border border-slate-300 text-slate-600 hover:border-blue-600 hover:bg-blue-50 px-6 py-2.5 rounded-lg font-semibold transition text-center text-sm"
                   >
                     Ingresar
                   </Link>
@@ -84,21 +31,19 @@ export default async function Home() {
               ) : (
                 <Link
                   href="/profile"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition text-center"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-semibold transition text-center text-sm"
                 >
-                  Ir al Dashboard
+                  Dashboard
                 </Link>
               )}
             </div>
           </div>
 
           <div className="hidden md:block">
-            <div className="relative w-full h-64 bg-gradient-to-br from-blue-50 to-slate-100 rounded-2xl border border-slate-200 flex items-center justify-center shadow-sm">
+            <div className="relative w-full h-72 bg-gradient-to-br from-blue-50 to-slate-100 rounded-xl border border-slate-200 flex items-center justify-center shadow-sm">
               <div className="text-center">
-                <div className="w-20 h-20 bg-blue-100 rounded-xl mx-auto mb-3 flex items-center justify-center text-3xl">
-                  💼
-                </div>
-                <p className="text-slate-600 font-medium text-sm">Plataforma de colaboración</p>
+                <div className="text-5xl mb-3">💼</div>
+                <p className="text-slate-600 font-medium text-sm">Plataforma colaborativa</p>
               </div>
             </div>
           </div>
@@ -106,40 +51,35 @@ export default async function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-slate-50 border-t border-slate-200">
+      <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            ✨ Por qué elegir Workana
+          <h2 className="text-3xl font-bold text-slate-900 mb-16">
+            ¿Por qué Workana?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
-                title: "Interfaz Intuitiva",
                 icon: "🎯",
-                description: "Fácil de usar para publicar proyectos y enviar propuestas. Sin complicaciones innecesarias.",
+                title: "Interfaz Intuitiva",
+                description: "Fácil de usar y sin complicaciones.",
               },
               {
-                title: "Seguridad Garantizada",
                 icon: "🔒",
-                description: "Tus datos están protegidos con encriptación de nivel empresarial y garantía de privacidad.",
+                title: "Seguridad",
+                description: "Tus datos protegidos siempre.",
               },
               {
-                title: "Soporte Confiable",
                 icon: "👥",
-                description: "Equipo dedicado para ayudarte en cada paso de tu experiencia como cliente o freelancer.",
+                title: "Soporte",
+                description: "Equipo dedicado a ayudarte.",
               },
             ].map((feature, idx) => (
-              <div
-                key={idx}
-                className="bg-white border border-slate-200 rounded-xl p-8 hover:shadow-lg hover:border-blue-200 transition"
-              >
-                <div className="w-12 h-12 bg-blue-100 rounded-lg mb-4 flex items-center justify-center text-2xl">
-                  {feature.icon}
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-3">
+              <div key={idx} className="bg-white border border-slate-200 rounded-xl p-8">
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
+                <p className="text-slate-600 text-sm">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -147,40 +87,40 @@ export default async function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">10K+</div>
-              <p className="text-slate-600">👥 Usuarios activos</p>
+              <div className="text-5xl font-bold text-blue-600 mb-3">10K+</div>
+              <p className="text-slate-600 font-medium">Usuarios activos</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">50K+</div>
-              <p className="text-slate-600">✅ Proyectos completados</p>
+              <div className="text-5xl font-bold text-blue-600 mb-3">50K+</div>
+              <p className="text-slate-600 font-medium">Proyectos completados</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">4.9/5</div>
-              <p className="text-slate-600">⭐ Calificación promedio</p>
+              <div className="text-5xl font-bold text-blue-600 mb-3">4.9/5</div>
+              <p className="text-slate-600 font-medium">Calificación promedio</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 border-t border-slate-200">
+      <section className="py-20 border-t border-slate-200">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">
-            ¿Listo para comenzar? 🎉
+            Comienza ahora
           </h2>
-          <p className="text-lg text-slate-600 mb-8">
-            Únete a miles de profesionales que ya están colaborando en proyectos exitosos.
+          <p className="text-slate-600 mb-8 text-sm">
+            Únete a profesionales colaborando en proyectos exitosos.
           </p>
           {!session && (
             <Link
               href="/register"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition"
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-2.5 rounded-lg font-semibold transition text-sm"
             >
-              Crear una cuenta
+              Crear cuenta gratis
             </Link>
           )}
         </div>
@@ -191,30 +131,30 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h4 className="text-white font-semibold mb-4 text-sm">Workana</h4>
-              <p className="text-slate-400 text-xs leading-relaxed">Plataforma de freelance moderna para conectar talento con oportunidades.</p>
+              <h4 className="text-white font-semibold mb-3 text-sm">Workana</h4>
+              <p className="text-slate-400 text-xs">Plataforma de freelance moderna.</p>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-4 text-sm">Recursos</h4>
-              <ul className="text-slate-400 text-xs space-y-2">
+              <h4 className="text-white font-semibold mb-3 text-sm">Recursos</h4>
+              <ul className="text-slate-400 text-xs space-y-1.5">
                 <li><Link href="#" className="hover:text-blue-400 transition">Documentación</Link></li>
                 <li><Link href="#" className="hover:text-blue-400 transition">Blog</Link></li>
                 <li><Link href="#" className="hover:text-blue-400 transition">Soporte</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-4 text-sm">Compañía</h4>
-              <ul className="text-slate-400 text-xs space-y-2">
+              <h4 className="text-white font-semibold mb-3 text-sm">Compañía</h4>
+              <ul className="text-slate-400 text-xs space-y-1.5">
                 <li><Link href="#" className="hover:text-blue-400 transition">Acerca de</Link></li>
                 <li><Link href="#" className="hover:text-blue-400 transition">Términos</Link></li>
                 <li><Link href="#" className="hover:text-blue-400 transition">Privacidad</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-4 text-sm">Legal</h4>
-              <ul className="text-slate-400 text-xs space-y-2">
-                <li><Link href="#" className="hover:text-blue-400 transition">Términos de servicio</Link></li>
-                <li><Link href="#" className="hover:text-blue-400 transition">Política de privacidad</Link></li>
+              <h4 className="text-white font-semibold mb-3 text-sm">Legal</h4>
+              <ul className="text-slate-400 text-xs space-y-1.5">
+                <li><Link href="#" className="hover:text-blue-400 transition">Términos</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Privacidad</Link></li>
               </ul>
             </div>
           </div>
@@ -223,6 +163,3 @@ export default async function Home() {
           </div>
         </div>
       </footer>
-    </div>
-  );
-}
