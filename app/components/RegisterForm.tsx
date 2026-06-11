@@ -68,32 +68,32 @@ export function RegisterForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center py-12 px-4">
       <div className="max-w-md w-full">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-14 h-14 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-2xl">W</span>
           </div>
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-8 text-white">
-            <h2 className="text-3xl font-bold">Crear Cuenta</h2>
-            <p className="text-blue-100 mt-2">Únete a nuestra comunidad</p>
+        <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-8">
+            <h2 className="text-3xl font-bold text-white">Crear Cuenta</h2>
+            <p className="text-blue-100 mt-2">Únete a nuestra plataforma</p>
           </div>
 
           <div className="p-8">
             {error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+              <div className="mb-6 p-4 bg-red-900/30 border border-red-700 text-red-300 rounded-lg text-sm">
                 {error}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
+                <label htmlFor="name" className="block text-sm font-semibold text-slate-100 mb-2">
                   Nombre Completo
                 </label>
                 <input
@@ -102,13 +102,13 @@ export function RegisterForm() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-700 text-gray-900"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-slate-100 placeholder-slate-400"
                   placeholder="Juan Pérez"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">
+                <label htmlFor="email" className="block text-sm font-semibold text-slate-100 mb-2">
                   Email
                 </label>
                 <input
@@ -117,28 +117,28 @@ export function RegisterForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-700 text-gray-900"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-slate-100 placeholder-slate-400"
                   placeholder="tu@ejemplo.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="role" className="block text-sm font-semibold text-gray-900 mb-2">
-                  ¿Qué eres?
+                <label htmlFor="role" className="block text-sm font-semibold text-slate-100 mb-2">
+                  Tipo de cuenta
                 </label>
                 <select
                   id="role"
                   value={role}
                   onChange={(e) => setRole(e.target.value as UserRole)}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-900 bg-white font-medium"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-slate-100 font-medium"
                 >
-                  <option value="CLIENT" className="text-gray-900">👤 Cliente - Busco freelancers</option>
-                  <option value="FREELANCER" className="text-gray-900">🚀 Freelancer - Ofrezco servicios</option>
+                  <option value="CLIENT" className="text-slate-100">Cliente - Busco freelancers</option>
+                  <option value="FREELANCER" className="text-slate-100">Freelancer - Ofrezco servicios</option>
                 </select>
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-gray-900 mb-2">
+                <label htmlFor="password" className="block text-sm font-semibold text-slate-100 mb-2">
                   Contraseña
                 </label>
                 <input
@@ -147,13 +147,13 @@ export function RegisterForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-700 text-gray-900"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-slate-100 placeholder-slate-400"
                   placeholder="••••••••"
                 />
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-900 mb-2">
+                <label htmlFor="confirmPassword" className="block text-sm font-semibold text-slate-100 mb-2">
                   Confirmar Contraseña
                 </label>
                 <input
@@ -162,7 +162,7 @@ export function RegisterForm() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-700 text-gray-900"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-slate-100 placeholder-slate-400"
                   placeholder="••••••••"
                 />
               </div>
@@ -170,16 +170,16 @@ export function RegisterForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:shadow-lg text-white font-semibold py-3 rounded-lg transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed mt-6"
               >
                 {loading ? "Creando cuenta..." : "Registrarse"}
               </button>
             </form>
 
-            <div className="mt-6 pt-6 border-t border-gray-200 text-center text-sm">
-              <p className="text-gray-600">
+            <div className="mt-6 pt-6 border-t border-slate-700 text-center text-sm">
+              <p className="text-slate-400">
                 ¿Ya tienes cuenta?{" "}
-                <Link href="/login" className="text-blue-600 hover:text-blue-700 font-semibold">
+                <Link href="/login" className="text-blue-400 hover:text-blue-300 font-semibold">
                   Inicia sesión
                 </Link>
               </p>
