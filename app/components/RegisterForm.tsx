@@ -68,8 +68,8 @@ export function RegisterForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center py-12 px-4">
-      <div className="max-w-md w-full">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6">
         {/* Logo */}
         <div className="flex justify-center mb-8">
           <div className="w-14 h-14 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg">
@@ -84,14 +84,14 @@ export function RegisterForm() {
             <p className="text-blue-100 mt-2">Únete a nuestra plataforma</p>
           </div>
 
-          <div className="p-8">
+          <div className="p-10">
             {error && (
-              <div className="mb-6 p-4 bg-red-900/30 border border-red-700 text-red-300 rounded-lg text-sm">
+              <div className="mb-8 p-4 bg-red-900/30 border border-red-700 text-red-300 rounded-lg text-sm">
                 {error}
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-semibold text-slate-100 mb-2">
                   Nombre Completo
@@ -176,7 +176,7 @@ export function RegisterForm() {
               </button>
             </form>
 
-            <div className="mt-6 pt-6 border-t border-slate-700 text-center text-sm">
+            <div className="mt-8 pt-8 border-t border-slate-700 text-center text-sm">
               <p className="text-slate-400">
                 ¿Ya tienes cuenta?{" "}
                 <Link href="/login" className="text-blue-400 hover:text-blue-300 font-semibold">
