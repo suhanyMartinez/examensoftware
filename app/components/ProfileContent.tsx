@@ -75,6 +75,9 @@ export function ProfileContent() {
                 </h1>
                 <p className="text-lg text-gray-600 mb-6">{session.user.email}</p>
                 <div className="flex flex-wrap gap-3">
+                  <Link href="/projects" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition transform hover:scale-105 shadow-md">
+                    📋 Mis Proyectos
+                  </Link>
                   <button
                     onClick={() => router.push("/profile/edit")}
                     className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition transform hover:scale-105 shadow-md"

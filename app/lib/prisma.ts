@@ -2,7 +2,7 @@ import "./env";
 
 let prismaClientInstance: any = null;
 
-export default new Proxy(
+const prismaProxy = new Proxy(
   {},
   {
     get: (target: any, prop: string) => {
@@ -26,3 +26,6 @@ export default new Proxy(
     },
   }
 ) as any;
+
+export default prismaProxy;
+export const prisma = prismaProxy;
