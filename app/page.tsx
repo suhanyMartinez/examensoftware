@@ -6,45 +6,40 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur border-b border-slate-700">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">W</span>
+    <div className="min-h-screen bg-slate-50">
+      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm">
+        <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-4 md:px-8 lg:px-10">
+          <div className="flex items-center gap-4">
+            <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-gradient-to-br from-blue-600 to-sky-500 text-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+              <span className="text-lg font-semibold">W</span>
             </div>
-            <span className="text-2xl font-bold text-slate-100">
-              Workana
-            </span>
+            <div>
+              <p className="text-sm font-semibold text-slate-900">Workana</p>
+              <p className="text-xs text-slate-500">Plataforma freelance moderna</p>
+            </div>
           </div>
 
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap items-center gap-4">
             {session ? (
-              <>
-                <span className="text-slate-300 text-sm">
-                  Bienvenido, {session.user?.name}
-                </span>
-                <Link
-                  href="/profile"
-                  className="px-4 py-2 rounded-lg text-slate-300 hover:text-blue-400 transition font-medium"
-                >
-                  Ir a Perfil
-                </Link>
-              </>
+              <Link
+                href="/profile"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition hover:border-blue-300 hover:text-blue-700"
+              >
+                Mi perfil
+              </Link>
             ) : (
               <>
                 <Link
                   href="/login"
-                  className="text-slate-300 hover:text-blue-400 font-medium transition"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition hover:border-blue-300 hover:text-blue-700"
                 >
-                  Iniciar Sesión
+                  Iniciar sesión
                 </Link>
                 <Link
                   href="/register"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 px-5 py-2 text-sm font-semibold text-white shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition hover:bg-blue-700"
                 >
-                  Registrarse
+                  Comienza ahora
                 </Link>
               </>
             )}
@@ -52,174 +47,74 @@ export default async function Home() {
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-50 mb-6 leading-tight">
-              La plataforma de
-              <span className="block text-blue-400">
-                freelance moderna
-              </span>
-            </h1>
-            <p className="text-xl text-slate-400 mb-8 leading-relaxed">
-              Conecta con profesionales de todo el mundo. Publica proyectos, encuentra talento, y colabora de manera segura.
+      <main className="mx-auto grid min-h-[92vh] max-w-[1280px] gap-16 px-6 py-12 md:grid-cols-[1.1fr_0.9fr] md:px-8 lg:px-10 xl:px-12">
+        <section className="flex min-h-[calc(92vh-96px)] flex-col justify-center gap-12">
+          <div className="space-y-6 max-w-3xl">
+            <p className="inline-flex items-center rounded-full bg-sky-100 px-4 py-2 text-sm font-semibold text-sky-700 shadow-[0_20px_60px_rgba(15,23,42,0.06)]">
+              🎯 Conecta con profesionales reales
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              {!session ? (
-                <>
-                  <Link
-                    href="/register"
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition text-center"
-                  >
-                    Comenzar
-                  </Link>
-                  <Link
-                    href="/login"
-                    className="border border-slate-600 text-slate-300 hover:border-slate-500 hover:bg-slate-800 px-8 py-4 rounded-lg font-semibold transition text-center"
-                  >
-                    Ingresar
-                  </Link>
-                </>
-              ) : (
-                <Link
-                  href="/profile"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition text-center"
-                >
-                  Ir al Dashboard
-                </Link>
-              )}
+            <div className="space-y-6">
+              <h1 className="text-5xl font-bold tracking-tight text-slate-950 sm:text-6xl leading-tight">
+                Conecta con <span className="text-blue-600">profesionales</span> y encuentra proyectos reales.
+              </h1>
+              <p className="max-w-2xl text-lg leading-8 text-slate-600">
+                La plataforma más confiable para descubrir talento, publicar proyectos y trabajar seguro desde cualquier lugar.
+              </p>
             </div>
           </div>
 
-          <div className="hidden md:block">
-            <div className="relative w-full h-96 bg-gradient-to-br from-slate-800 to-slate-700 rounded-2xl border border-slate-600 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-blue-600/20 rounded-xl mx-auto mb-4 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-blue-600 rounded-lg"></div>
-                </div>
-                <p className="text-slate-400">Plataforma de colaboración</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 bg-slate-800/50 border-t border-slate-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center text-slate-50 mb-16">
-            Por qué elegir Workana
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Interfaz Intuitiva",
-                description: "Fácil de usar para publicar proyectos y enviar propuestas. Sin complicaciones innecesarias.",
-              },
-              {
-                title: "Seguridad Garantizada",
-                description: "Tus datos están protegidos con encriptación de nivel empresarial y garantía de privacidad.",
-              },
-              {
-                title: "Soporte Confiable",
-                description: "Equipo dedicado para ayudarte en cada paso de tu experiencia como cliente o freelancer.",
-              },
-            ].map((feature, idx) => (
-              <div
-                key={idx}
-                className="bg-slate-700/50 border border-slate-600 rounded-xl p-8 hover:border-slate-500 transition"
-              >
-                <div className="w-12 h-12 bg-blue-600/20 rounded-lg mb-4 flex items-center justify-center">
-                  <div className="w-6 h-6 bg-blue-400 rounded"></div>
-                </div>
-                <h3 className="text-xl font-bold text-slate-100 mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-slate-400">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="text-5xl font-bold text-blue-400 mb-2">10K+</div>
-              <p className="text-slate-400 text-lg">Usuarios activos</p>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold text-blue-400 mb-2">50K+</div>
-              <p className="text-slate-400 text-lg">Proyectos completados</p>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold text-blue-400 mb-2">4.9/5</div>
-              <p className="text-slate-400 text-lg">Calificación promedio</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 border-t border-slate-700">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-slate-50 mb-6">
-            ¿Listo para comenzar?
-          </h2>
-          <p className="text-xl text-slate-400 mb-8">
-            Únete a miles de profesionales que ya están colaborando en proyectos exitosos.
-          </p>
-          {!session && (
+          <div className="flex flex-col gap-4 sm:flex-row">
             <Link
               href="/register"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-blue-600 px-6 text-base font-semibold text-white shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition hover:bg-blue-700"
             >
-              Crear una cuenta
+              Comienza ahora
             </Link>
-          )}
-        </div>
-      </section>
+            <Link
+              href="/login"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-slate-200 bg-white px-6 text-base font-semibold text-slate-800 shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition hover:bg-slate-100"
+            >
+              Inicia sesión
+            </Link>
+          </div>
+        </section>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-700 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="text-slate-100 font-semibold mb-4">Workana</h4>
-              <p className="text-slate-400 text-sm">Plataforma de freelance moderna para conectar talento con oportunidades.</p>
-            </div>
-            <div>
-              <h4 className="text-slate-100 font-semibold mb-4">Recursos</h4>
-              <ul className="text-slate-400 text-sm space-y-2">
-                <li><Link href="#" className="hover:text-blue-400 transition">Documentación</Link></li>
-                <li><Link href="#" className="hover:text-blue-400 transition">Blog</Link></li>
-                <li><Link href="#" className="hover:text-blue-400 transition">Soporte</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-slate-100 font-semibold mb-4">Compañía</h4>
-              <ul className="text-slate-400 text-sm space-y-2">
-                <li><Link href="#" className="hover:text-blue-400 transition">Acerca de</Link></li>
-                <li><Link href="#" className="hover:text-blue-400 transition">Términos</Link></li>
-                <li><Link href="#" className="hover:text-blue-400 transition">Privacidad</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-slate-100 font-semibold mb-4">Legal</h4>
-              <ul className="text-slate-400 text-sm space-y-2">
-                <li><Link href="#" className="hover:text-blue-400 transition">Términos de servicio</Link></li>
-                <li><Link href="#" className="hover:text-blue-400 transition">Política de privacidad</Link></li>
-              </ul>
+        <section className="flex items-center justify-center">
+          <div className="w-full overflow-hidden rounded-[24px] border border-slate-200 bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-500 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+            <div className="grid gap-6">
+              <div className="rounded-[24px] border border-white/10 bg-white/10 p-6 backdrop-blur-sm">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.24em] text-sky-100/90">Workana</p>
+                    <h2 className="mt-3 text-2xl font-semibold text-white">Tu espacio freelance</h2>
+                  </div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 text-xl">
+                    🤝
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-[24px] bg-white/10 p-6">
+                  <p className="text-sm uppercase tracking-[0.24em] text-sky-100/80">Proyectos</p>
+                  <p className="mt-4 text-3xl font-semibold text-white">250+</p>
+                </div>
+                <div className="rounded-[24px] bg-white/10 p-6">
+                  <p className="text-sm uppercase tracking-[0.24em] text-sky-100/80">Freelancers</p>
+                  <p className="mt-4 text-3xl font-semibold text-white">8K+</p>
+                </div>
+              </div>
+
+              <div className="rounded-[24px] bg-white/10 p-6">
+                <p className="text-sm uppercase tracking-[0.24em] text-sky-100/80">Seguridad</p>
+                <p className="mt-4 text-base leading-7 text-slate-100/90">
+                  Contratos, pagos y comunicación protegidos en una sola plataforma.
+                </p>
+              </div>
             </div>
           </div>
-          <div className="border-t border-slate-700 pt-8 text-center text-slate-400 text-sm">
-            <p>&copy; 2026 Workana. Todos los derechos reservados.</p>
-          </div>
-        </div>
-      </footer>
+        </section>
+      </main>
     </div>
   );
 }

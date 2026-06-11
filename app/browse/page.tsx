@@ -5,14 +5,15 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ProjectBrowseCard } from "@/app/components/ProjectBrowseCard";
+import { ProjectCategory, ProjectStatus } from "@/app/generated/prisma";
 
 interface Project {
   id: string;
   title: string;
   description: string;
-  category: string;
+  category: ProjectCategory;
   budget: number;
-  status: string;
+  status: ProjectStatus;
   client: { id: string; name?: string; email: string };
   proposals: Array<{ id: string; status: string }>;
 }
@@ -49,13 +50,8 @@ export default function BrowseProjectsPage() {
       try {
         setLoading(true);
         const url = new URL("/api/browse/projects", window.location.origin);
-
-        if (selectedCategory !== "ALL") {
-          url.searchParams.append("category", selectedCategory);
-        }
-        if (search) {
-          url.searchParams.append("search", search);
-        }
+        if (selectedCategory !== "ALL") url.searchParams.append("category", selectedCategory);
+        if (search) url.searchParams.append("search", search);
 
         const res = await fetch(url.toString());
         if (!res.ok) throw new Error("Error fetching projects");
@@ -71,53 +67,75 @@ export default function BrowseProjectsPage() {
       }
     };
 
-    if (session) {
-      fetchProjects();
-    }
+    if (session) fetchProjects();
   }, [selectedCategory, search, session]);
 
   if (status === "loading" || loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-slate-50">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-          <p className="text-gray-600">Buscando proyectos...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4" />
+          <p className="text-slate-500 text-sm font-medium">Buscando proyectos...</p>
         </div>
       </div>
     );
   }
 
-  if (status === "unauthenticated") {
-    return null;
-  }
+  if (status === "unauthenticated") return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
+    <div className="min-h-screen bg-slate-50">
+      {/* Top bar */}
+      <div className="bg-white border-b border-slate-200 px-4 sm:px-8 py-4 flex items-center justify-between sticky top-0 z-10">
+        <Link
+          href="/profile"
+          className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-blue-600 font-medium transition-colors"
+        >
+          ← Volver al perfil
+        </Link>
+        <span className="text-sm text-slate-400 font-medium">
+          {projects.length} proyecto{projects.length !== 1 ? "s" : ""} encontrado{projects.length !== 1 ? "s" : ""}
+        </span>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        {/* Page header */}
         <div className="mb-8">
-          <Link
-            href="/profile"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold mb-4"
-          >
-            ← Volver
-          </Link>
-          <h1 className="text-4xl font-bold text-gray-900">Explorar Proyectos</h1>
-          <p className="text-gray-600 mt-2">Encuentra los proyectos perfectos para ti</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+            Explora proyectos
+          </h1>
+          <p className="mt-2 text-slate-500 text-base max-w-xl">
+            Filtra por categoría o palabras clave para encontrar oportunidades que se ajusten a tu perfil.
+          </p>
         </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Filters card */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-8 shadow-sm">
+          {/* Search + select row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             <div>
-              <label htmlFor="category" className="block text-sm font-semibold text-gray-900 mb-2">
+              <label htmlFor="search" className="block text-sm font-semibold text-slate-700 mb-1.5">
+                Buscar
+              </label>
+              <input
+                id="search"
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Título, descripción o cliente..."
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:bg-white"
+              />
+            </div>
+            <div>
+              <label htmlFor="category" className="block text-sm font-semibold text-slate-700 mb-1.5">
                 Categoría
               </label>
               <select
                 id="category"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-gray-900 bg-white font-medium"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:bg-white"
               >
                 {categoryOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -126,63 +144,104 @@ export default function BrowseProjectsPage() {
                 ))}
               </select>
             </div>
+          </div>
 
-            <div>
-              <label htmlFor="search" className="block text-sm font-semibold text-gray-900 mb-2">
-                Buscar proyectos
-              </label>
-              <input
-                id="search"
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Busca por título o descripción..."
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition placeholder-gray-700 text-gray-900"
-              />
-            </div>
+          {/* Category pills */}
+          <div className="flex flex-wrap gap-2">
+            {categoryOptions.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => setSelectedCategory(opt.value)}
+                className={`rounded-full px-4 py-1.5 text-xs font-semibold transition ${
+                  selectedCategory === opt.value
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Projects Grid */}
-        <div className="mt-8">
-          {error && (
-            <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg mb-6">
-              {error}
-            </div>
-          )}
+        {/* Error */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl">
+            {error}
+          </div>
+        )}
 
-          {projects.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">🔍</div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                No hay proyectos disponibles
-              </h2>
-              <p className="text-gray-600 mb-6">
-                {selectedCategory === "ALL"
-                  ? "Intenta más tarde, nuevos proyectos se agregan constantemente"
-                  : "No hay proyectos en esta categoría. Prueba otra"}
-              </p>
-              {selectedCategory !== "ALL" && (
+        {/* Results header */}
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between mb-5">
+          <div className="flex items-center gap-2 flex-wrap">
+            {selectedCategory !== "ALL" && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-xs font-semibold text-blue-700">
+                {categoryOptions.find((o) => o.value === selectedCategory)?.label}
                 <button
                   onClick={() => setSelectedCategory("ALL")}
-                  className="text-blue-600 hover:text-blue-700 font-semibold"
+                  className="ml-0.5 text-blue-400 hover:text-blue-700"
+                  aria-label="Quitar filtro"
                 >
-                  Ver todos los proyectos
+                  ×
                 </button>
-              )}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project) => (
-                <ProjectBrowseCard
-                  key={project.id}
-                  {...project}
-                  hasProposal={project.proposals.length > 0}
-                />
-              ))}
-            </div>
-          )}
+              </span>
+            )}
+            {search && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600">
+                "{search}"
+                <button
+                  onClick={() => setSearch("")}
+                  className="ml-0.5 text-slate-400 hover:text-slate-700"
+                  aria-label="Limpiar búsqueda"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+          </div>
+          <div className="flex gap-2 text-xs text-slate-500">
+            <span className="rounded-full bg-white border border-slate-200 px-3 py-1.5 font-medium">Más reciente</span>
+            <span className="rounded-full bg-white border border-slate-200 px-3 py-1.5 font-medium">Relevancia</span>
+          </div>
         </div>
+
+        {/* Projects grid / empty state */}
+        {projects.length === 0 ? (
+          <div className="text-center py-20 rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="text-5xl mb-4">🔍</div>
+            <h2 className="text-xl font-bold text-slate-900 mb-2">No hay proyectos disponibles</h2>
+            <p className="text-slate-500 text-sm mb-6 max-w-xs mx-auto">
+              {selectedCategory === "ALL"
+                ? "Intenta más tarde, nuevos proyectos se agregan constantemente."
+                : "No hay proyectos en esta categoría. Prueba otra o restablece el filtro."}
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <button
+                onClick={() => { setSelectedCategory("ALL"); setSearch(""); }}
+                className="rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
+              >
+                Ver todos los proyectos
+              </button>
+              <button
+                onClick={() => setSearch("")}
+                className="rounded-full border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              >
+                Limpiar búsqueda
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project) => (
+              <ProjectBrowseCard
+                key={project.id}
+                {...project}
+                hasProposal={project.proposals.length > 0}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
