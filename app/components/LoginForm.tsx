@@ -38,32 +38,32 @@ export function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-sm w-full space-y-4">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6">
         {/* Logo */}
-        <div className="flex justify-center mb-6">
-          <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center shadow-md">
-            <span className="text-white font-bold text-xl">W</span>
+        <div className="flex justify-center mb-8">
+          <div className="w-14 h-14 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+            <span className="text-white font-bold text-2xl">W</span>
           </div>
         </div>
 
         {/* Card */}
-        <div className="bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-6">
-            <h2 className="text-2xl font-bold text-white">👋 Bienvenido</h2>
-            <p className="text-blue-100 mt-1 text-sm">Inicia sesión en tu cuenta</p>
+        <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-8">
+            <h2 className="text-3xl font-bold text-white">Bienvenido</h2>
+            <p className="text-blue-100 mt-2">Inicia sesión en tu cuenta</p>
           </div>
 
-          <div className="p-6">
+          <div className="p-10">
             {error && (
-              <div className="mb-6 p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+              <div className="mb-8 p-4 bg-red-900/30 border border-red-700 text-red-300 rounded-lg text-sm">
                 {error}
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-1.5">
+                <label htmlFor="email" className="block text-sm font-semibold text-slate-100 mb-2">
                   Email
                 </label>
                 <input
@@ -72,13 +72,13 @@ export function LoginForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-slate-900 placeholder-slate-400 text-sm"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-slate-100 placeholder-slate-400"
                   placeholder="tu@ejemplo.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-slate-900 mb-1.5">
+                <label htmlFor="password" className="block text-sm font-semibold text-slate-100 mb-2">
                   Contraseña
                 </label>
                 <input
@@ -87,7 +87,7 @@ export function LoginForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-slate-900 placeholder-slate-400 text-sm"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-slate-100 placeholder-slate-400"
                   placeholder="••••••••"
                 />
               </div>
@@ -95,22 +95,22 @@ export function LoginForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Cargando..." : "Iniciar Sesión"}
               </button>
             </form>
 
-            <div className="mt-6 pt-6 border-t border-slate-200 space-y-3 text-sm">
+            <div className="mt-8 pt-8 border-t border-slate-700 space-y-4 text-sm">
               <Link
                 href="/forgot-password"
-                className="block text-center text-blue-600 hover:text-blue-700 font-medium transition text-sm"
+                className="block text-center text-blue-400 hover:text-blue-300 font-medium transition py-2"
               >
                 ¿Olvidaste tu contraseña?
               </Link>
-              <p className="text-slate-600 text-center text-sm">
+              <p className="text-slate-400 text-center py-2">
                 ¿No tienes cuenta?{" "}
-                <Link href="/register" className="text-blue-600 hover:text-blue-700 font-semibold">
+                <Link href="/register" className="text-blue-400 hover:text-blue-300 font-semibold">
                   Regístrate aquí
                 </Link>
               </p>
