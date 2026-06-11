@@ -2,7 +2,7 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { hash, compare } from "bcryptjs";
-import prisma from "./prisma";
+import { prisma } from "./prisma";
 
 declare module "next-auth" {
   interface User {

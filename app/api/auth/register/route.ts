@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { registerUser } from "@/app/lib/auth";
+import { prisma } from "@/app/lib/prisma";
 
 export async function POST(request: Request) {
   try {
@@ -15,7 +16,6 @@ export async function POST(request: Request) {
     }
 
     // Verificar si el email ya existe
-    const { default: prisma } = await import("@/app/lib/prisma");
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
