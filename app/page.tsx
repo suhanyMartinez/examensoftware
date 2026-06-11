@@ -2,6 +2,56 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">W</span>
+            </div>
+            <span className="text-2xl font-bold text-slate-900">
+              Workana
+            </span>
+          </div>
+
+          <div className="flex items-center space-x-8">
+            {session ? (
+              <>
+                <span className="text-slate-600 text-sm">
+                  Bienvenido, {session.user?.name}
+                </span>
+                <Link
+                  href="/profile"
+                  className="px-4 py-2 rounded-lg text-slate-600 hover:text-blue-600 transition font-medium"
+                >
+                  Perfil
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-slate-600 hover:text-blue-600 font-medium transition"
+                >
+                  Iniciar Sesión
+                </Link>
+                <Link
+                  href="/register"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition"
+                >
+                  Registrarse
+                </Link>
+              </>
+            )}
+          </div>
+        </nav>
+      </header>
+
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -163,3 +213,6 @@ import { authOptions } from "@/app/lib/auth";
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
